@@ -1,0 +1,7 @@
+{
+  "name": "@aragon/v2-migrator",
+  "version": "0.1.0",
+  "private": true,
+  "license": "GPL-3.0",
+  "author": "Facu Spagnuolo<facundo_spagnuolo@icloud.com>"
+}
