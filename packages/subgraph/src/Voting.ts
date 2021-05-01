@@ -2,7 +2,7 @@ import { Address, BigInt } from '@graphprotocol/graph-ts'
 
 import { ERC20 as ERC20Contract } from '../generated/templates/Voting/ERC20'
 import { StartVote as StartVoteEvent, ExecuteVote as ExecuteVoteEvent, Voting as VotingContract } from '../generated/templates/Voting/Voting'
-import { Asset as AssetEntity, Voting as VotingEntity, Migration as MigrationEntity, ERC20 as ERC20Entity } from '../generated/schema'
+import { DAO as DAOEntity, Asset as AssetEntity, Voting as VotingEntity, Migration as MigrationEntity, ERC20 as ERC20Entity } from '../generated/schema'
 import { decodeAmounts, decodeExecutor, decodeTokens, decodeMigrationType } from '../utils/migration'
 
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
@@ -15,6 +15,7 @@ export function handleStartVote(event: StartVoteEvent): void {
 
   const type = decodeMigrationType(voting, script)
   if (type != 0) {
+    const dao = DAOEntity.load(voting.dao)!
     const migrationId = buildMigrationId(event.address, event.params.voteId)
     const migration = new MigrationEntity(migrationId)
     migration.voting = event.address.toHexString()
@@ -25,6 +26,7 @@ export function handleStartVote(event: StartVoteEvent): void {
     migration.script = script
     migration.executed = false
     migration.createdAt = event.block.timestamp
+    migration.daoCreatedAt = dao.createdAt
     migration.save()
 
     const tokens = decodeTokens(script, type)

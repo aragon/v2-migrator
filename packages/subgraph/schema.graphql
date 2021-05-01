@@ -28,6 +28,7 @@ type Migration @entity {
   metadata: String!
   executed: Boolean!
   script: String!
+  daoCreatedAt: BigInt!
   createdAt: BigInt!
   executedAt: BigInt
   assets: [Asset!] @derivedFrom(field: "migration")
