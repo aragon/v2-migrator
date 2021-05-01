@@ -1,0 +1,47 @@
+type DAO @entity {
+  id: ID!
+  vault: Bytes
+  finance: Bytes
+  createdAt: BigInt!
+}
+
+type Executor @entity {
+    id: ID!
+    queue: Bytes!
+    createdAt: BigInt!
+}
+
+type Voting @entity {
+  id: ID!
+  dao: DAO!
+  migration: Migration
+  createdAt: BigInt!
+}
+
+type Migration @entity {
+  id: ID!
+  voting: Voting!
+  executor: Executor!
+  voteId: BigInt!
+  creator: Bytes!
+  metadata: String!
+  executed: Boolean!
+  script: String!
+  createdAt: BigInt!
+  executedAt: BigInt
+  assets: [Asset!] @derivedFrom(field: "migration")
+}
+
+type Asset @entity {
+  id: ID!
+  migration: Migration!
+  token: ERC20!
+  balance: BigInt!
+}
+
+type ERC20 @entity {
+  id: ID!
+  name: String!
+  symbol: String!
+  decimals: Int!
+}

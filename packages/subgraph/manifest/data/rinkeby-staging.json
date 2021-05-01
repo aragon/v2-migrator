@@ -1,0 +1,22 @@
+{
+  "network": "rinkeby",
+  "dataSources": {
+    "Organizations": [
+      {
+        "name": "MigrationTest",
+        "address": "0x77bd5D06A5f34D1e3204Ee31027D148C04cc91De",
+        "startBlock": "8505432"
+      }
+    ],
+    "OrganizationFactories": [],
+    "OrganizationTemplates": [],
+    "LegacyOrganizationTemplates": [],
+    "Govern": [
+      {
+        "name": "GovernRegistry",
+        "address": "0x0cd3621EC403F26ad9F79c3d77B1dda1f8474c6f",
+        "startBlock": 7445834
+      }
+    ]
+  }
+}
