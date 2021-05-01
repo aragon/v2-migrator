@@ -11,9 +11,9 @@ export function handleStartVote(event: StartVoteEvent): void {
   const voting = loadOrCreateVoting(event.address, event.block.timestamp)
   const votingApp = VotingContract.bind(event.address)
   const voteData = votingApp.getVote(event.params.voteId)
-  const script = voteData.value9.toString()
+  const script = voteData.value9.toHexString()
 
-  const type = decodeMigrationType(voting, script.toString())
+  const type = decodeMigrationType(voting, script)
   if (type != 0) {
     const migrationId = buildMigrationId(event.address, event.params.voteId)
     const migration = new MigrationEntity(migrationId)
@@ -32,14 +32,11 @@ export function handleStartVote(event: StartVoteEvent): void {
     for (let i = 0; i < tokens.length; i++) {
       const assetId = migrationId + '-' + tokens[i].toHexString()
       const asset = new AssetEntity(assetId)
-      asset.balance = amounts[i]
+      asset.amount = amounts[i]
       asset.token = buildERC20(tokens[i])
       asset.migration = migrationId
       asset.save()
     }
-
-    voting.migration = migrationId
-    voting.save()
   }
 }
 
@@ -74,7 +71,7 @@ function buildERC20(address: Address): string {
   const id = address.toHexString()
   let token = ERC20Entity.load(id)
 
-  if (token === null) {
+  if (token == null) {
     const isETH = address.toHexString() == ZERO_ADDRESS
     const tokenContract = ERC20Contract.bind(address)
     token = new ERC20Entity(id)

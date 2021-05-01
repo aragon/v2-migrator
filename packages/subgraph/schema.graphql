@@ -2,6 +2,7 @@ type DAO @entity {
   id: ID!
   vault: Bytes
   finance: Bytes
+  voting: Voting
   createdAt: BigInt!
 }
 
@@ -14,7 +15,7 @@ type Executor @entity {
 type Voting @entity {
   id: ID!
   dao: DAO!
-  migration: Migration
+  migrations: [Migration!] @derivedFrom(field: "voting")
   createdAt: BigInt!
 }
 
@@ -36,7 +37,7 @@ type Asset @entity {
   id: ID!
   migration: Migration!
   token: ERC20!
-  balance: BigInt!
+  amount: BigInt!
 }
 
 type ERC20 @entity {

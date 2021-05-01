@@ -14,7 +14,9 @@ export function handleNewAppProxy(event: NewAppProxyEvent): void {
   const address = event.params.proxy
   const appId = event.params.appId.toHexString()
 
-  if (appId == VOTING_ID) {
+  if (appId == VOTING_ID && dao.voting == null) {
+    dao.voting = address.toHexString()
+    dao.save()
     loadOrCreateVoting(address, event.block.timestamp)
     VotingTemplate.create(address)
   } else if (appId == VAULT_APP_ID || appId == AGENT_APP_ID) {
