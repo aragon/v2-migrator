@@ -24,6 +24,4 @@
     eventHandlers:
       - event: DeployInstance(address,indexed address)
         handler: handleDeployInstance
-      - event: InstalledApp(address,bytes32)
-        handler: handleInstalledApp
     file: ./src/dao/DAOKit.ts

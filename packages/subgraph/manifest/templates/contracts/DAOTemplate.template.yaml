@@ -24,6 +24,4 @@
     eventHandlers:
       - event: DeployDao(address)
         handler: handleDeployDao
-      - event: InstalledApp(address,bytes32)
-        handler: handleInstalledApp
     file: ./src/dao/DAOTemplate.ts
