@@ -34,6 +34,8 @@ const FINANCE_TRANSFER_CALLDATA_LENGTH = '000000e4'
  *
  */
 export function decodeMigrationType(voting: VotingEntity, script: string): number {
+  if (script.length <= 10) return 0
+
   // Assert given script is a call script
   const scriptHeader = script.substring(2, 10)
   if (scriptHeader != CALL_SCRIPT_ID) return 0
