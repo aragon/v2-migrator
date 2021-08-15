@@ -26,7 +26,6 @@ const Subgraph = {
     return result.tokenBalances
       .map((balance: any) => ({ token: balance.token.id, amount: balance.balance }))
       .filter((balance: DaoAsset) => balance.amount !== '0')
-      .filter((balance: DaoAsset) => balance.token == ZERO_ADDRESS)
   }
 }
 

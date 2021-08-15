@@ -18,8 +18,11 @@ import Subgraph from './src/subgraph'
  *  the vote should go through the Token Manager respectively.
  *  Finally, `address` is simply used to indicate the DAO address and the `executor` to tell the recipient of the funds.
  */
-export default async (network: Network, dao: Dao): Promise<string> => {
+export default async (network: Network, dao: Dao): Promise<string|null> => {
   const assets = await Subgraph.getAssets(network, dao)
+  if(assets.length == 0) {
+    return null
+  }
   const script = Encoder.encodeTransferAllCallScript(dao, assets, dao.executor)
   return Encoder.encodeNewVote(dao, script, dao.executor)
 }

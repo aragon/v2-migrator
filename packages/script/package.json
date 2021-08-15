@@ -1,15 +1,17 @@
 {
   "name": "@aragon/v2-migrator-script",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.3",
   "license": "GPL-3.0",
+  "main": "build",
   "author": "Facu Spagnuolo<facundo_spagnuolo@icloud.com>",
-  "engines": {
-    "node": ">=12.0.0"
-  },
+  "files":[
+    "build"
+  ],
   "scripts": {
     "build": "tsc && cp -r ./abi ./build/abi",
-    "prestart": "yarn build"
+    "prestart": "yarn build",
+    "prepare": "rm -rf ./build && yarn build",
+    "prepublishOnly": "git push && git push --tags"
   },
   "dependencies": {
     "ethers": "^5.1.3",
