@@ -96,8 +96,8 @@
     "Govern": [
       {
         "name": "GovernRegistry",
-        "address": "0x7714e0a2A2DA090C2bbba9199A54B903bB83A73d",
-        "startBlock": 7445834
+        "address": "0xf46253ef29FaedAbf63AA8cA6c0A41CbbdC93948",
+        "startBlock": 9000000
       }
     ]
   }

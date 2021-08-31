@@ -5,11 +5,11 @@ USER=$1
 NAME=$2
 NETWORK=$3
 
-# Require $GRAPHKEY to be set
-if [[ -z "${GRAPHKEY}" ]]; then
->&2 echo "Please set \$GRAPHKEY to your The Graph access token to run this command."
-exit 1
-fi
+# # Require $GRAPHKEY to be set
+# if [[ -z "${GRAPHKEY}" ]]; then
+# >&2 echo "Please set \$GRAPHKEY to your The Graph access token to run this command."
+# exit 1
+# fi
 
 # Build manifest
 echo ''
@@ -33,4 +33,4 @@ echo '> Deploying subgraph: '$FULLNAME
 graph deploy $FULLNAME \
   --ipfs https://api.thegraph.com/ipfs/ \
   --node https://api.thegraph.com/deploy/ \
-  --access-token $GRAPHKEY
+  --access-token bbc801ee63684142a30128a3bef5a222
